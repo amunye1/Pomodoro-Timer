@@ -1,4 +1,4 @@
-function Clock() {
+function tlock() {
   async function twentyFiveMinuteClock() {
     let twentyFiveMinuteTotal = 1500;
 
@@ -33,4 +33,4 @@ function Clock() {
   );
 }
 
-export default Clock;
+export default tlock;

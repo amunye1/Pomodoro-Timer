@@ -1,12 +1,11 @@
-import FifteenMinuteClock from "../Clock15";
-import TwentyFiveMinuteClock from "../Clock25";
-import FiveMinuteClock from "../Clock5";
+import Clock from "../Clock";
+
 function App() {
     return(
         <>
-            <TwentyFiveMinuteClock/>
-            <FiveMinuteClock/>
-            <FifteenMinuteClock/>
+        <div className="dark-tan">
+            <Clock/>    
+        </div>
         </>
         
     );
