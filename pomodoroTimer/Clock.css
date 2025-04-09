@@ -10,12 +10,12 @@
 
   .off-white{
     background-color: #ede7db !important;
-    
   }
 
-  .dark-tan{
-    background-color: #d4c5a8 ;
-  }
   .w-half{
     max-width: 50%;
+  }
+
+  .card {
+    transition: background-color 0.5s ease-in-out;
   }

@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef, use } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Clock.css";
 import Buttons from "./Buttons";
-function Clock() {
+
+function Clock({ setBackgroundColor }) {
   // Set initial time to 1500 seconds (25 minutes)
   const [timeLeft, setTimeLeft] = useState(1500);
 
@@ -10,6 +11,9 @@ function Clock() {
   const [pomodoroTotal, setPomodoroTotal] = useState(1);
   const [shortBreakTotal, setShortBreakTotal] = useState(1);
   const [longBreakTotal, setLongBreakTotal] = useState(1);
+  const [color, setColor] = useState("#ede7db");
+  const [pomodoroCount, setPomodoroCount] = useState(0);
+  
   let btnName = "Start";
   const timerId = useRef(null);
 
@@ -23,12 +27,27 @@ function Clock() {
           clearInterval(timerId.current);
           timerId.current = null;
           setIsRunning(false); // Ensure we set isRunning to false
+          
+          // Handle timer completion and mode switching
           if (mode === "pomodoro") {
             setPomodoroTotal((prev) => prev + 1);
+            const newCount = pomodoroCount + 1;
+            setPomodoroCount(newCount);
+            
+            // After 4 pomodoros, switch to long break
+            if (newCount % 4 === 0) {
+              setMode("longBreak");
+            } else {
+              // Otherwise switch to short break
+              setMode("shortBreak");
+            }
           } else if (mode === "shortBreak") {
-            setShortBreakTotal((prev) => prev + 1); // Increment correctly
+            setShortBreakTotal((prev) => prev + 1);
+            setMode("pomodoro");
           } else if (mode === "longBreak") {
             setLongBreakTotal((prev) => prev + 1);
+            setMode("pomodoro");
+            setPomodoroCount(0); // Reset pomodoro count after long break
           }
           return 0;
         }
@@ -64,13 +83,21 @@ function Clock() {
 
   useEffect(() => {
     if (mode === "pomodoro") {
-      setTimeLeft(1500);
+      setTimeLeft(1);
+      setBackgroundColor("rgb(212 197 168)");
+      setColor("rgba(255, 255, 255, 0.1)");
     } else if (mode === "shortBreak") {
-      setTimeLeft(15);
+      setTimeLeft(30);
+      setBackgroundColor("rgb(57, 112, 151)");
+      setColor("rgba(255, 255, 255, 0.1)");
     } else if (mode === "longBreak") {
-      setTimeLeft(900);
+      setTimeLeft(9);
+      setBackgroundColor("rgb(56, 133, 138)");
+      setColor("rgba(255, 255, 255, 0.1)");
     }
-  }, [mode]);
+  }, [mode, setBackgroundColor]);
+
+
 
   // Format time as minutes:seconds
   const minutes = Math.floor(timeLeft / 60);
@@ -81,7 +108,7 @@ function Clock() {
     <div className="container max-auto">
       <div className="row justify-content-center">
         <div className="col-12 col-sm-10 col-md-8 col-lg-6">
-          <div className="off-white card text-center mt-6 p-5">
+          <div className="card text-center mt-6 p-5" style={{ backgroundColor: color }}>
             <div className="card-body">
               <div>
                 <Buttons mode={mode} setMode={setMode} />
@@ -92,6 +119,7 @@ function Clock() {
                   {isRunning ? "Pause" : "Start"}
                 </button>
               </div>
+              
             </div>
             {mode === "pomodoro" ? (
               <>
@@ -106,7 +134,7 @@ function Clock() {
             ) : mode === "longBreak" ? (
               <>
                 <p>#{longBreakTotal}</p>
-                <p>Time for a break!</p>
+                <p>Time for a long break!</p>
               </>
             ) : null}
           </div>
