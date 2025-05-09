@@ -1,0 +1,38 @@
+.taskBox.container{
+    background-color: whitesmoke;
+    min-height: 25%;
+    max-width:50%;
+    margin: 0;
+    padding:10px 20px 0px;
+    text-align: left;
+}
+.taskInput{
+    padding:10px,0px;
+    border-radius:4px;
+    color:rgb(85,85,85);
+    height:3em;
+    text-align: center;
+    font-size: 22px;
+    border:none;
+    background-color: whitesmoke;
+}
+
+.allItems{
+    margin: 0 0 0 35px;
+}
+
+.taskInputDiv{
+    max-width: 100%;
+    
+}
+span{
+
+    text-align: left;
+}
+
+.numberOfPomdoro{
+    width:75px;
+    background-color: rgb(239, 239, 239);
+    
+    text-align: left;
+}

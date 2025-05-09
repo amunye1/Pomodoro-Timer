@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Clock from "../Clock";
+import Task from "../TaskFrontEndCard"
 
 function App() {
     const [backgroundColor, setBackgroundColor] = useState("#d4c5a8");
@@ -15,7 +16,9 @@ function App() {
             right: 0,
             bottom: 0
         }}>
-            <Clock setBackgroundColor={setBackgroundColor}/>    
+            <Clock setBackgroundColor={setBackgroundColor}/>
+            <Task/>
+
         </div>
     );
 }
