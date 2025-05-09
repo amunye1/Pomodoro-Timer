@@ -17,7 +17,7 @@ function App() {
             bottom: 0
         }}>
             <Clock setBackgroundColor={setBackgroundColor}/>
-            <Task/>
+            <Task setBackgroundColor={setBackgroundColor}/>
 
         </div>
     );

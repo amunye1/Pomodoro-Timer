@@ -1,15 +1,28 @@
 import React, {useState, useEffect} from "react";
 import "./Task.css"
-function TaskFrontEndCard(){
+function TaskFrontEndCard({ setBackgroundColor }){
     const [showTask, setShowTask] = useState(false);
-
+    const [mode, setMode] = useState("pomodoro");
     const handleAddTaskClick = () => setShowTask(true);
     const handleCancelClick = () => setShowTask(false);
     const [pomodoroCount, setPomodoroCount] = useState(1)
+      const [color, setColor] = useState("#ede7db")
     const handleSaveClick =  () => {
+        if(taskName.trim() !== ''){
+            setTaskList(prev =>[
+                ...prev,
+                {name: taskName, pomodoros:pomodoroCount}
+            ]);
+            setTaskName('');
+            setPomodoroCount(1);
+            setShowTask(false);
+        }
         //save logic goes here 
         setShowTask(false);
-    }
+    };
+
+    const [taskName, setTaskName] = useState('');
+    const [taskList, setTaskList] = useState([]);
 
     const increment = () =>{
         setPomodoroCount(prevPomodoroCount => prevPomodoroCount +1)
@@ -18,8 +31,22 @@ function TaskFrontEndCard(){
     const decrement = () =>{
         setPomodoroCount(prev => Math.max(1, prev - 1)); // Prevent going below 1
     }
+
+     useEffect(() => {
+        if (mode === "pomodoro") {
+          setBackgroundColor("rgb(212 197 168)");
+          setColor("rgba(255, 255, 255, 0.1)");
+        } else if (mode === "shortBreak") {
+          setBackgroundColor("rgb(57, 112, 151)");
+          setColor("rgba(255, 255, 255, 0.1)");
+        } else if (mode === "longBreak") {
+          setBackgroundColor("rgb(56, 133, 138)");
+          setColor("rgba(255, 255, 255, 0.1)");
+        }
+      }, [mode, setBackgroundColor]);
     return (
-        <div className = "taskBox container mx-auto">
+        
+        <div  className = "taskBox container mx-auto">
             {!showTask ?(<div className="row">
                 <div className="col">
                     <button onClick={handleAddTaskClick}>Add Task</button>
@@ -29,7 +56,11 @@ function TaskFrontEndCard(){
             ):(
             <div className="col allItems">
                 <div className ="row mx-auto taskInputDiv">
-                    <input className="taskInput" placeholder="What are you working on ?"></input>
+                    <input className="taskInput"
+                     placeholder="What are you working on ?"
+                     value={taskName}
+                    onChange={(e) => setTaskName(e.target.value)}
+                     />
                 </div>
                 <div className="row">
                     <div className ="row spanEstPomodoro">
@@ -58,7 +89,13 @@ function TaskFrontEndCard(){
             </div>
             )}
                 
-
+            {/* 🔽 Insert saved task cards here */}
+        {taskList.map((task, index) => (
+            <div key={index} className=" card mt-2 p-2 ">
+            <strong>{task.name}</strong>
+            <p>Pomodoros: {task.pomodoros}</p>
+            </div>
+        ))}
         </div>
     );
 }
