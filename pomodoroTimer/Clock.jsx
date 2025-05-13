@@ -12,7 +12,6 @@ function Clock({ setBackgroundColor }) {
   const [shortBreakTotal, setShortBreakTotal] = useState(1);
   const [longBreakTotal, setLongBreakTotal] = useState(1);
   const [color, setColor] = useState("#ede7db");
-  const [pomodoroCount, setPomodoroCount] = useState(0);
   
   let btnName = "Start";
   const timerId = useRef(null);
@@ -27,27 +26,12 @@ function Clock({ setBackgroundColor }) {
           clearInterval(timerId.current);
           timerId.current = null;
           setIsRunning(false); // Ensure we set isRunning to false
-          
-          // Handle timer completion and mode switching
           if (mode === "pomodoro") {
             setPomodoroTotal((prev) => prev + 1);
-            const newCount = pomodoroCount + 1;
-            setPomodoroCount(newCount);
-            
-            // After 4 pomodoros, switch to long break
-            if (newCount % 4 === 0) {
-              setMode("longBreak");
-            } else {
-              // Otherwise switch to short break
-              setMode("shortBreak");
-            }
           } else if (mode === "shortBreak") {
-            setShortBreakTotal((prev) => prev + 1);
-            setMode("pomodoro");
+            setShortBreakTotal((prev) => prev + 1); // Increment correctly
           } else if (mode === "longBreak") {
             setLongBreakTotal((prev) => prev + 1);
-            setMode("pomodoro");
-            setPomodoroCount(0); // Reset pomodoro count after long break
           }
           return 0;
         }
@@ -82,8 +66,9 @@ function Clock({ setBackgroundColor }) {
   }, []);
 
   useEffect(() => {
+    pauseTimer();
     if (mode === "pomodoro") {
-      setTimeLeft(1);
+      setTimeLeft(1500);
       setBackgroundColor("rgb(212 197 168)");
       setColor("rgba(255, 255, 255, 0.1)");
     } else if (mode === "shortBreak") {
@@ -119,7 +104,6 @@ function Clock({ setBackgroundColor }) {
                   {isRunning ? "Pause" : "Start"}
                 </button>
               </div>
-              
             </div>
             {mode === "pomodoro" ? (
               <>
@@ -134,7 +118,7 @@ function Clock({ setBackgroundColor }) {
             ) : mode === "longBreak" ? (
               <>
                 <p>#{longBreakTotal}</p>
-                <p>Time for a long break!</p>
+                <p>Time for a break!</p>
               </>
             ) : null}
           </div>

@@ -6,7 +6,8 @@ function TaskFrontEndCard({ setBackgroundColor }){
     const handleAddTaskClick = () => setShowTask(true);
     const handleCancelClick = () => setShowTask(false);
     const [pomodoroCount, setPomodoroCount] = useState(1)
-      const [color, setColor] = useState("#ede7db")
+    const [color, setColor] = useState("#ede7db")
+    const [color2, setColor2] = useState("#f5f5f5")
     const handleSaveClick =  () => {
         if(taskName.trim() !== ''){
             setTaskList(prev =>[
@@ -44,11 +45,22 @@ function TaskFrontEndCard({ setBackgroundColor }){
           setColor("rgba(255, 255, 255, 0.1)");
         }
       }, [mode, setBackgroundColor]);
+
+      useEffect(()=>{
+        if(handleAddTaskClick){
+            setColor2("none")
+        }
+      })
     return (
         
-        <div  className = "taskBox container mx-auto">
+        <div  className = "taskBox container mx-auto"
+        style={{
+                backgroundColor:showTask ?  "#f5f5f5" :"transparent",
+                transition: "background-color 0.3s ease"
+            }}
+        >
             {!showTask ?(<div className="row">
-                <div className="col">
+                <div className="col add task">
                     <button onClick={handleAddTaskClick}>Add Task</button>
                     
                 </div>
@@ -79,7 +91,12 @@ function TaskFrontEndCard({ setBackgroundColor }){
                         <button> + Add Project</button>
                     </div>
                 </div> 
-                <div className="row">
+                <div className="row"
+                
+                style={{
+                    backgroundColor: showTask ? "#EFEFEF" : "transparent",
+                }}
+                >
                     <div className="col"> 
                         <button>Delete</button>
                         <button onClick={handleCancelClick}>Cancel</button>

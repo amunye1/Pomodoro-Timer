@@ -1,47 +1,101 @@
 .taskBox.container{
-    
     min-height: 25%;
     max-width:48%;
     margin: 10px;
     padding: 20px;
     text-align: left;
-    
+    position: relative;
+    background-color: transparent !important;
+    transition: background-color 0.3s ease;
+}
 
+.taskBox.container:has(.allItems) {
+    background-color: whitesmoke !important;
 }
+
+.add-task{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-top: 12px;
+    border: 2px dashed rgba(255, 255, 255, 0.4);
+    height: 8vh;
+    padding: 10px;
+    background-color: transparent !important;
+}
+
+.add-task button {
+    background: transparent;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 16px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: inline-block;
+}
+
+.taskBox.container:has(.allItems) .add-task button {
+    background-color: whitesmoke;
+}
+
 .card{
-    border:1px solid hsl(0,0%, 80%);
-    border-radius:10px;
-    box-shadow:5px 5px 5px hsl(0, 0%, 0%, 0.1);
-    
+    border: 1px solid hsl(0,0%, 80%);
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px hsl(0, 0%, 0%, 0.1);
 }
+
 .taskInput{
-    padding:10px,0px;
-    border-radius:4px;
-    color:rgb(85,85,85);
-    height:3em;
+    padding: 10px 0px;
+    border-radius: 4px;
+    color: rgb(85,85,85);
+    height: 3em;
     text-align: center;
     font-size: 22px;
-    border:none;
+    border: none;
     background-color: whitesmoke;
 }
 
 .allItems{
     margin: 0 0 0 35px;
+
 }
 
 .taskInputDiv{
     max-width: 100%;
-    
 }
-span{
 
+/* Add styles for the footer */
+.taskBox .row:last-child {
+    margin: 0 -20px;
+    width: calc(100% + 40px);
+    padding: 14px 20px;
+    text-align: right;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+/* Hide footer when task form is not open */
+
+span{
     text-align: left;
 }
 
 .numberOfPomdoro{
-    width:75px;
-    background-color:rgb(85,85,85);
-    color:white;
+    width: 75px;
+    background-color: rgb(85,85,85);
+    color: white;
     text-align: left;
 }
 
