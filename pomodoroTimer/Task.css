@@ -8,6 +8,18 @@
     background-color: transparent !important;
     transition: background-color 0.3s ease;
 }
+.footer.container{
+    background-color: #a8a6a6;
+    margin-top: -10px;
+    padding: 14px 20px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 48%;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+}
 
 .taskBox.container:has(.allItems) {
     background-color: whitesmoke !important;
@@ -20,7 +32,7 @@
     align-items: center;
     cursor: pointer;
     margin-top: 12px;
-    border: 2px dashed rgba(255, 255, 255, 0.4);
+    border: 2px dashed rgba(124, 121, 121, 0.4);
     height: 8vh;
     padding: 10px;
     background-color: transparent !important;
@@ -44,14 +56,18 @@
   margin-top: 12px;
 }
 
-
+.task-card{
+    max-width: 48%;
+}
 
 
 
 .card{
-    border: 1px solid hsl(0,0%, 80%);
-    border-radius: 10px;
-    box-shadow: 5px 5px 5px hsl(0, 0%, 0%, 0.1);
+  border: 1px solid hsl(0, 0%, 80%);
+ 
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  box-shadow: 5px 5px 5px hsl(0, 0%, 0%, 0.1);
 }
 
 .taskInput{

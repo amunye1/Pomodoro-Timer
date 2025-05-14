@@ -52,79 +52,97 @@ function TaskFrontEndCard({ setBackgroundColor }){
         }
       })
     return (
-        
-        <div  className = "taskBox container mx-auto"
-        style={{
-                backgroundColor:showTask ?  "#f5f5f5" :"transparent",
-                transition: "background-color 0.3s ease"
-            }}
+        <>
+        {/* 🧱 TASKBOX — always rendered */}
+        <div
+          className="taskBox container mx-auto"
+          style={{
+            backgroundColor: showTask ? "#f5f5f5" : "transparent",
+            transition: "background-color 0.3s ease",
+            padding: "20px",
+            borderRadius: "8px",
+          }}
         >
-            {!showTask ?(<div className="row">
-                <div className="col add-task">
-                    <button onClick={handleAddTaskClick}>Add Task</button>
-                    
-                </div>
+          {!showTask ? (
+            <div className="row">
+              <div className="col add-task">
+                <button onClick={handleAddTaskClick}>Add Task</button>
+              </div>
             </div>
-            ):(
+          ) : (
             <div className="col allItems">
-                <div className ="row mx-auto taskInputDiv">
-                    <input className="taskInput"
-                     placeholder="What are you working on ?"
-                     value={taskName}
-                    onChange={(e) => setTaskName(e.target.value)}
-                     />
+              <div className="row mx-auto taskInputDiv">
+                <input
+                  className="taskInput"
+                  placeholder="What are you working on?"
+                  value={taskName}
+                  onChange={(e) => setTaskName(e.target.value)}
+                />
+              </div>
+      
+              <div className="row">
+                <div className="row spanEstPomodoro">
+                  <span>Est Pomodoros</span>
                 </div>
-                <div className="row">
-                    <div className ="row spanEstPomodoro">
-                        <span>  Est Pomodoros</span>
-                    </div>
-                    <div className="col">
-                        <input className ="numberOfPomdoro" type="number" min="1" value={pomodoroCount} step="1" 
-                        onChange={(e) => setPomodoroCount(Number(e.target.value))}/>
-                        <button onClick={increment}>Up Arrow</button>
-                        <button onClick={decrement}>Down Arrow</button>
-                    </div>
-                </div>      
-                <div className="row">
-                    <div className="col">        
-                        <button>+ Add Note</button>
-                        <button> + Add Project</button>
-                    </div>
-                </div> 
-                <div className="row"
-                
-                style={{
-                    backgroundColor: showTask ? "#EFEFEF" : "transparent",
-                    margin: "0 -50px",
-                    width: "calc(100% + 40px)",
-                    padding: "14px 20px",
-                    textAlign: "right",
-                    borderBottomLeftRadius: "8px",
-                    borderBottomRightRadius: "8px",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    marginTop: "auto",
-                }}
-                >
-                    <div className="col"> 
-                        <button>Delete</button>
-                        <button onClick={handleCancelClick}>Cancel</button>
-                        <button onClick={handleSaveClick}>Save</button>
-                    </div>
+                <div className="col">
+                  <input
+                    className="numberOfPomdoro"
+                    type="number"
+                    min="1"
+                    value={pomodoroCount}
+                    step="1"
+                    onChange={(e) => setPomodoroCount(Number(e.target.value))}
+                  />
+                  <button onClick={increment}>Up Arrow</button>
+                  <button onClick={decrement}>Down Arrow</button>
                 </div>
+              </div>
+      
+              <div className="row">
+                <div className="col">
+                  <button>+ Add Note</button>
+                  <button>+ Add Project</button>
+                </div>
+              </div>
             </div>
-            )}
-                
-            {/* 🔽 Insert saved task cards here */}
+          )}
+        </div>
+      
+        {/* ✅ FOOTER + TASK LIST — Only render footer if showTask */}
+        {showTask && (
+          <>
+            <div
+              className="footer container mx-auto"
+              style={{
+                backgroundColor: "#EFEFEF",
+                marginTop: "-10px",
+                padding: "14px 20px",
+                borderBottomLeftRadius: "8px",
+                borderBottomRightRadius: "8px",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                boxShadow: "0 -2px 5px rgba(0,0,0,0.05)",
+              }}
+            >
+              <div className="col">
+                <button>Delete</button>
+                <button onClick={handleCancelClick}>Cancel</button>
+                <button onClick={handleSaveClick}>Save</button>
+              </div>
+            </div>
+          </>
+        )}
+      
+        {/* ✅ TASK CARDS: always shown */}
         {taskList.map((task, index) => (
-            <div key={index} className=" card mt-2 p-2 ">
+          <div key={index} className="card task-card mt-2 p-2 mx-auto">
             <strong>{task.name}</strong>
             <p>Pomodoros: {task.pomodoros}</p>
-            </div>
+          </div>
         ))}
-        </div>
-    );
-}
+      </>
+      
+    )}
 
 export default TaskFrontEndCard;
