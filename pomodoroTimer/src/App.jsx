@@ -1,35 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-
+import { useState } from 'react';
+import Clock from "../Clock";
+import Task from "../TaskFrontEndCard"
 function App() {
-  const [count, setCount] = useState(0)
+    const [backgroundColor, setBackgroundColor] = useState("#d4c5a8");
+    return(
+        <>
+        <div className="dark-tan">
+            <div style={{ 
+                minHeight: "100vh", 
+                backgroundColor: backgroundColor,
+                width: "100%",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0
+            }}>
+                <Clock setBackgroundColor={setBackgroundColor}/>
+                <Task setBackgroundColor={setBackgroundColor}/>
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+            </div>    
+        </div>
+        </>
+        
+    );
 }
 
 export default App

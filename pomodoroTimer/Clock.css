@@ -1,0 +1,21 @@
+.mt-6 {
+    margin-top: 8em;
+  }
+
+  .time-font{
+    font-size:80px;
+    font-weight: bold;
+    margin:0.5em;
+  }
+
+  .off-white{
+    background-color: #ede7db !important;
+    
+  }
+
+  .dark-tan{
+    background-color: #d4c5a8 ;
+  }
+  .w-half{
+    max-width: 50%;
+  }
