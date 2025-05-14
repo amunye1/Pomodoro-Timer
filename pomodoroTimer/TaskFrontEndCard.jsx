@@ -60,7 +60,7 @@ function TaskFrontEndCard({ setBackgroundColor }){
             }}
         >
             {!showTask ?(<div className="row">
-                <div className="col add task">
+                <div className="col add-task">
                     <button onClick={handleAddTaskClick}>Add Task</button>
                     
                 </div>
@@ -95,6 +95,16 @@ function TaskFrontEndCard({ setBackgroundColor }){
                 
                 style={{
                     backgroundColor: showTask ? "#EFEFEF" : "transparent",
+                    margin: "0 -50px",
+                    width: "calc(100% + 40px)",
+                    padding: "14px 20px",
+                    textAlign: "right",
+                    borderBottomLeftRadius: "8px",
+                    borderBottomRightRadius: "8px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginTop: "auto",
                 }}
                 >
                     <div className="col"> 
