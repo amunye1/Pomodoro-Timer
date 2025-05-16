@@ -7,7 +7,7 @@ function TaskFrontEndCard({ setBackgroundColor }){
     const handleCancelClick = () => setShowTask(false);
     const [pomodoroCount, setPomodoroCount] = useState(1)
     const [color, setColor] = useState("#ede7db")
-    const [color2, setColor2] = useState("#f5f5f5")
+    const [openNote, setOpenNote] = useState(true)
     const handleSaveClick =  () => {
         if(taskName.trim() !== ''){
             setTaskList(prev =>[
@@ -46,13 +46,18 @@ function TaskFrontEndCard({ setBackgroundColor }){
         }
       }, [mode, setBackgroundColor]);
 
-      useEffect(()=>{
-        if(handleAddTaskClick){
-            setColor2("none")
-        }
-      })
+     
     return (
         <>
+
+         {/* ✅ TASK CARDS: always shown */}
+         {taskList.map((task, index) => (
+          <div key={index} className="card task-card mt-2 p-2 mx-auto">
+            <strong>{task.name}</strong>
+            <p>Pomodoros: {task.pomodoros}</p>
+          </div>
+        ))}
+
         {/* 🧱 TASKBOX — always rendered */}
         <div
           className="taskBox container mx-auto"
@@ -66,7 +71,7 @@ function TaskFrontEndCard({ setBackgroundColor }){
           {!showTask ? (
             <div className="row">
               <div className="col add-task">
-                <button onClick={handleAddTaskClick}>Add Task</button>
+                <button className="add-task-btn" onClick={handleAddTaskClick}>Add Task</button>
               </div>
             </div>
           ) : (
@@ -100,7 +105,11 @@ function TaskFrontEndCard({ setBackgroundColor }){
       
               <div className="row">
                 <div className="col">
-                  <button>+ Add Note</button>
+                {
+                    openNote ? <button onClick={() => setOpenNote(false)}>+ Add Note</button>  :
+                    <textarea rows ="10" cols="20"></textarea>
+                  
+                }
                   <button>+ Add Project</button>
                 </div>
               </div>
@@ -134,13 +143,7 @@ function TaskFrontEndCard({ setBackgroundColor }){
           </>
         )}
       
-        {/* ✅ TASK CARDS: always shown */}
-        {taskList.map((task, index) => (
-          <div key={index} className="card task-card mt-2 p-2 mx-auto">
-            <strong>{task.name}</strong>
-            <p>Pomodoros: {task.pomodoros}</p>
-          </div>
-        ))}
+       
       </>
       
     )}

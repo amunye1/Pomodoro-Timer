@@ -27,12 +27,24 @@ function Clock({ setBackgroundColor }) {
           timerId.current = null;
           setIsRunning(false); // Ensure we set isRunning to false
           if (mode === "pomodoro") {
-            setPomodoroTotal((prev) => prev + 1);
+            const nextPomodoro = pomodoroTotal + 1;
+            setPomodoroTotal(nextPomodoro);
+          
+            if (nextPomodoro % 4 === 0) {
+              setLongBreakTotal((prev) => prev + 1);
+              setMode("longBreak");
+            } else {
+              setMode("shortBreak");
+            }
+        
           } else if (mode === "shortBreak") {
-            setShortBreakTotal((prev) => prev + 1); // Increment correctly
+            setShortBreakTotal((prev) => prev + 1);
+            setMode("pomodoro");
+        
           } else if (mode === "longBreak") {
-            setLongBreakTotal((prev) => prev + 1);
+            setMode("pomodoro");
           }
+        
           return 0;
         }
         return prevTime - 1;
@@ -68,15 +80,15 @@ function Clock({ setBackgroundColor }) {
   useEffect(() => {
     pauseTimer();
     if (mode === "pomodoro") {
-      setTimeLeft(1500);
+      setTimeLeft(5);
       setBackgroundColor("rgb(212 197 168)");
       setColor("rgba(255, 255, 255, 0.1)");
     } else if (mode === "shortBreak") {
-      setTimeLeft(30);
+      setTimeLeft(5);
       setBackgroundColor("rgb(57, 112, 151)");
       setColor("rgba(255, 255, 255, 0.1)");
     } else if (mode === "longBreak") {
-      setTimeLeft(9);
+      setTimeLeft(5);
       setBackgroundColor("rgb(56, 133, 138)");
       setColor("rgba(255, 255, 255, 0.1)");
     }
